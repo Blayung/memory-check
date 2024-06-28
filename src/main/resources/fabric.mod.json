@@ -2,7 +2,7 @@
     "schemaVersion": 1,
 
     "id": "memory-check",
-    "version": "1.0",
+    "version": "${modVersion}",
     "name": "Memory Check",
     "description": "Quickly check your server's memory usage!",
     "license": "GPL-3.0-only",
