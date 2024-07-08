@@ -8,14 +8,14 @@
     "license": "GPL-3.0-only",
 
     "authors": [
-        "Blay"
+        "Wojciech Paruch <teamaster69@proton.me>"
     ],
 
     "contact": {
         "homepage": "https://modrinth.com/mod/memory-check",
         "sources": "https://github.com/Blayung/memory-check",
         "issues": "https://github.com/Blayung/memory-check/issues",
-        "email": "gpewojan1@gmail.com"
+        "email": "teamaster69@proton.me"
     },
 
     "environment": "server",
