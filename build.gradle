@@ -24,9 +24,8 @@ java {
 jar.from("LICENSE.txt")
 
 processResources {
-	inputs.property("modVersion", modVersion)
 	filesMatching("fabric.mod.json") {
-		expand "modVersion": modVersion
+		expand "version": modVersion
 	}
 }
 
@@ -37,7 +36,7 @@ modrinth {
     projectId = "memory-check"
     changelog = rootProject.file("MODRINTH_CHANGELOG.md").text
     versionName = "Memory Check " + modVersion
-    versionNumber = "1.0"
+    versionNumber = modVersion
     gameVersions = ["1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1"]
     loaders = ["fabric", "quilt"]
     dependencies {

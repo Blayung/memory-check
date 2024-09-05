@@ -2,11 +2,12 @@
     "schemaVersion": 1,
 
     "id": "memory-check",
-    "version": "${modVersion}",
+    "version": "${version}",
+
     "name": "Memory Check",
     "description": "Quickly check your server's memory usage!",
-    "license": "GPL-3.0-only",
 
+    "license": "GPL-3.0-only",
     "authors": [
         "Wojciech Paruch <teamaster69@proton.me>"
     ],
