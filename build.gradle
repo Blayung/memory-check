@@ -4,13 +4,13 @@ plugins {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.21.5"
-	mappings "net.fabricmc:yarn:1.21.5+build.1:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.16.10"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.119.5+1.21.5"
+	minecraft "com.mojang:minecraft:1.21.6"
+	mappings "net.fabricmc:yarn:1.21.6+build.1:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.16.14"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.127.1+1.21.6"
 }
 
-def modVersion = "1.4"
+def modVersion = "1.5"
 
 base.archivesName = "memory-check-" + modVersion
 
@@ -37,7 +37,7 @@ modrinth {
     changelog = rootProject.file("modrinth/changelog.md").text
     versionName = "Memory Check " + modVersion
     versionNumber = modVersion
-    gameVersions = ["1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5"]
+    gameVersions = ["1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6"]
     loaders = ["fabric"]
     dependencies {
         required.project "fabric-api"
