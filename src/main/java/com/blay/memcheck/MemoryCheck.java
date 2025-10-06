@@ -27,6 +27,7 @@ public class MemoryCheck implements DedicatedServerModInitializer {
         cmdSource.sendMessage(Text.literal(String.format("%s: %s (%.1f%%)", label, humanReadableBytes(bytes), (float) bytes / memoryLimit * 100)));
     }
 
+    @Override
     public void onInitializeServer() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(
             CommandManager.literal("memcheck").executes(context -> {
