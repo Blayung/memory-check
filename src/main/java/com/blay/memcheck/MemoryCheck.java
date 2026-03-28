@@ -4,9 +4,9 @@ import net.fabricmc.api.DedicatedServerModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
 
 import java.text.StringCharacterIterator;
 
@@ -23,29 +23,29 @@ public class MemoryCheck implements DedicatedServerModInitializer {
         return String.format("%.1f %cB", bytes / 1000.0, ci.current());
     }
  
-    private void sendLabeledResponseBytesOutOfLimit(ServerCommandSource cmdSource, String label, long bytes, long memoryLimit) {
-        cmdSource.sendMessage(Text.literal(String.format("%s: %s (%.1f%%)", label, humanReadableBytes(bytes), (float) bytes / memoryLimit * 100)));
+    private void sendLabeledResponseBytesAndLimit(CommandSourceStack commandSource, String label, long bytes, long byteLimit) {
+        commandSource.sendSystemMessage(Component.literal(String.format("%s: %s (%.1f%%)", label, humanReadableBytes(bytes), (float) bytes / byteLimit * 100)));
     }
 
     @Override
     public void onInitializeServer() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(
-            CommandManager.literal("memcheck").executes(context -> {
-                ServerCommandSource cmdSource = context.getSource();
+            Commands.literal("memcheck").executes(context -> {
+                CommandSourceStack commandSource = context.getSource();
 
-                cmdSource.sendMessage(Text.literal(" Memory Usage"));
-                cmdSource.sendMessage(Text.literal("=============="));
+                commandSource.sendSystemMessage(Component.literal(" Memory Usage"));
+                commandSource.sendSystemMessage(Component.literal("=============="));
     
                 Runtime runtime = Runtime.getRuntime();
 
                 long memoryLimit = runtime.maxMemory();
 
-                cmdSource.sendMessage(Text.literal("Limit: " + humanReadableBytes(memoryLimit)));
+                commandSource.sendSystemMessage(Component.literal("Limit: " + humanReadableBytes(memoryLimit)));
 
                 long allocatedMemory = runtime.totalMemory();
 
-                sendLabeledResponseBytesOutOfLimit(cmdSource, "Allocated", allocatedMemory, memoryLimit);
-                sendLabeledResponseBytesOutOfLimit(cmdSource, "Used", allocatedMemory - runtime.freeMemory(), memoryLimit);
+                sendLabeledResponseBytesAndLimit(commandSource, "Allocated", allocatedMemory, memoryLimit);
+                sendLabeledResponseBytesAndLimit(commandSource, "Used", allocatedMemory - runtime.freeMemory(), memoryLimit);
 
                 return 1;
             })
